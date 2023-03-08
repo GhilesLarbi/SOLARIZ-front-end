@@ -1,0 +1,757 @@
+@font-face {
+    font-family: "Inter";
+    src: url(../fonts/Inter.ttf);
+}
+@font-face {
+    font-family: "Galapagos";
+    src: url(../fonts/GALAPAGOS.ttf);
+}
+
+:root {
+    --clr-bg : #101010;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    overflow: hidden;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    line-height: 1;
+}
+
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+
+.wrapper {
+
+    display: none;
+    grid-template-columns: 100vw;
+
+    height: 100vh;
+    overflow: hidden;
+
+    background: url(../images/stars.svg), var(--clr-bg);
+
+    cursor: grab;
+}
+
+
+
+.planets-wrapper {
+    grid-column: 1;
+    grid-row: 1;
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+.planet {
+    width: 70%;
+    padding-bottom: 70%;
+    border-radius: 50%;
+
+    
+    position: absolute;
+    top: 40%;
+
+    background-size: auto 100%;
+    animation: planet-rotate 40s infinite linear;
+
+
+    box-shadow: -4rem 4rem 10rem var(--color),
+    inset 10rem -10rem 15rem var(--color),
+    inset -20rem 10rem 30rem #000000;
+
+
+    transform: translate(var(--trans-x, 0), var(--trans-y)) scale(var(--scale));
+    opacity: var(--opacity);
+    transition: transform .5s, opacity .5s, visibility .5s;
+}
+
+@keyframes planet-rotate {
+    100% {
+        background-position-x: 200%;
+    }
+}
+
+
+.planet__mercury {
+    background-image: url(../images/1-Mercury.jpg);
+    animation-duration: 30s;
+}
+
+.planet__venus {
+    background-image: url(../images/2-Venus.jpg);
+    animation-direction: reverse;
+}
+
+.planet__earth {
+    background-image: url(../images/3-Earth.jpg);
+}
+
+.planet__earth::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+
+    background-size: auto 100%;
+    background-image: url(../images/cloud.jpg) ;
+    opacity: .5;
+    
+    mix-blend-mode: screen;
+
+    animation: planet-rotate 60s infinite linear;
+
+    box-shadow: inset 10rem -10rem 15rem var(--color),
+                inset -20rem 10rem 30rem #000000;
+}
+
+.planet__mars {
+        background-image: url(../images/4-Mars.jpg);
+}
+
+.planet__jupiter {
+        background-image: url(../images/5-Jupiter.jpg);
+
+        box-shadow: -2rem 2rem 10rem var(--color),
+        inset 3rem -3rem 5rem var(--color),
+        inset -20rem 10rem 30rem #000000;
+}
+
+.planet__jupiter::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+
+    background-size: auto 100%;
+    background-image: url(../images/5-Jupiter.jpg) ;
+    
+    mix-blend-mode: screen;
+
+    animation: planet-rotate 60s infinite linear reverse;
+
+    box-shadow:
+    inset -20rem 10rem 30rem #000000;
+}
+
+.planet__saturn {
+        background-image: url(../images/6-Saturn.jpg);
+}
+
+.planet__uranus {
+        background-image: url(../images/7-Uranus.jpg);
+}
+
+.planet__neptune {
+        background-image: url(../images/8-Neptune.jpg);
+}
+
+.planet__pluto {
+        background-image: url(../images/9-Pluto.jpg);
+}
+
+
+
+
+
+.content-wrapper{
+    grid-column: 1;
+    grid-row: 1;
+    z-index: 20;
+
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    scroll-behavior: smooth;
+
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.planet-text, .controls-wrapper {
+    display: flex;
+    flex-direction: column;
+    color: #BCBCBC;
+    padding: 3rem;
+    transition: opacity .2s, visibility .2s;
+}
+
+
+.controls-wrapper {
+    align-items: center;
+    padding-right: 1.2rem;
+}
+
+.hide.planet-text {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.more-info .controls-wrapper {
+    min-height: 100vh
+}
+
+.planet-name {
+    color: var(--color);
+    font-size: 7.2rem;
+    font-weight: 900;
+    transition: color .5s;
+    text-transform: uppercase;
+
+
+    font-family: "Galapagos";
+
+    margin-bottom: .8rem;
+    user-select: none;
+}
+
+.planet-name span {
+    display: inline-block;
+
+    transition-property: opacity, transform ;
+    transition-duration: .1s;
+}
+
+.planet-name span.hide {
+    transform: translateY(-20%);
+    opacity: 0;
+}
+
+
+.planets-descriptions {
+    display: grid;
+    grid-template-columns: 1fr;
+    user-select: none;
+}
+
+.planet-description, .planet-long-description {
+    grid-column: 1;
+    grid-row: 1;
+
+    font-size: 1.8rem;
+    max-width: 30ch;
+    line-height: 1.6;
+    transition: opacity .2s, visibility .2s;
+    user-select: none;
+}
+
+.hide.planet-description {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+
+.planet-long-description {
+    max-width: 45ch;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    transition: opacity .2s, visibility .2s, height .2s;
+}
+
+
+.more-info .planet-long-description {
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+}
+
+.horizental-line {
+    flex-grow: 1;
+    width: 1px;
+    min-height: 4rem;
+    background-color: #444;
+    margin-block: 2rem;
+
+    transform-origin: top;
+    transition: transform .3s;
+}
+
+.info-btn {
+    flex-shrink: 0;
+    color: var(--color);
+    font-size: 2rem;
+    font-weight: 300;
+
+    width: 2.4rem;
+    height: 2.4rem;
+    transform: translateX(-50%);
+
+    border: 1px solid var(--color);
+    border-radius: 3rem;
+
+
+
+    transition: all .5s;
+    position: relative;
+}
+.info-btn * {
+    pointer-events: none;
+}
+
+.info-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color);
+    opacity: 1;
+
+    z-index: -1;
+    border-radius: inherit;
+
+    animation: info-anim 1.5s infinite;
+}
+
+@keyframes info-anim {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.scroll__btn .btn-info-icon {
+    display: none;
+}
+
+
+.scroll__btn {
+    height: 4.8rem;
+}
+
+.scroll__btn::before {
+    height: auto;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 80%;
+    padding-bottom: 80%;
+
+    animation: trans-anim 1s infinite alternate linear;
+}
+
+@keyframes trans-anim {
+    0% {
+        transform: translate(-50%, 0);
+    }
+    100% {
+        transform: translate(-50%, 140%);
+    }
+}
+
+/* controls */
+
+.planet-namber {
+    width: 1em;
+    height: 1em;
+    color: var(--color);
+    font-size: 4rem;
+    text-align: center;
+
+    font-family: "Galapagos";
+
+
+    transition-property: opacity, transform, visibility, color;
+    transition-duration: .1s, .1s, .1s, .5s;
+}
+
+.hide.planet-namber {
+    transform: translateX(50%);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.more-info .controls-wrapper .horizental-line {
+    transform: scaleY(0);
+    transform-origin: bottom;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+    transition-property: transform, opacity, visibility;
+    transition-duration: .4s;
+    transition-delay: var(--trans-delay);
+}
+
+.hide.controls {
+    transform: translateX(400%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.control {
+    position: relative;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+}
+
+
+.control__select {
+    background-color: var(--color);
+    border-color: var(--color);
+}
+
+.control__select:not(:last-child)::before, .control__select:not(:first-child)::after {
+    content: "";
+    position: absolute;
+    left: calc(50% - .5px);
+
+    background-color: var(--color);
+    width: 1px;
+    height: calc(1.5rem + 1px);
+}
+
+.control__select::before {
+    bottom: 100%;
+    transform-origin: bottom;
+}
+.control__select::after {
+    top: 100%;
+    transform-origin: top;
+}
+
+
+.control--title {
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translate(-1rem,-50%);
+
+    padding: .4rem 1rem;
+    border: 1px solid #aaa;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #eee;
+    background-color: transparent;
+    text-transform: lowercase;
+    border-radius: .2rem;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform .2s var(--trans-delay), opacity .2s var(--trans-delay);
+}
+
+.control__select .control--title {
+    background-color: var(--color);
+    color: var(--clr-bg);
+    border-color: var(--color);
+}
+
+.hide .control--title {
+    transform: translateY(-50%) translateX(50%);
+    opacity: 0;
+}
+
+.control__select .control--title::before {
+    content: "";
+    position: absolute;
+    left: 100%;
+    width: calc(1.6rem - 1px);
+    height: 1px;
+    background-color: var(--color);
+}
+
+/* statistics */
+.stats-wrapper {
+    display: none;
+
+    position: relative;
+
+    align-self: baseline;
+    grid-column: 1 /-1;
+    min-height: 100vh;
+    padding: 3rem;
+
+    width: 50%;
+    margin-left:  auto;
+
+    flex-direction: column;
+    gap: 4rem;
+
+    transition: opacity .2s, visibility .2s;
+}
+.hide.stats-wrapper {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+
+
+.more-info .stats-wrapper {
+    display: flex;
+}
+
+.stats-container{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stats-headeing {
+    color: var(--color);
+    font-size: 7.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-family: "Galapagos";
+    margin-bottom: 4rem;
+}
+
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    max-width: fit-content;
+}
+
+.stat-heading {
+    color: #BCBCBC;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.stat-line {
+    height: 1px;
+    background-color: var(--color);
+}
+
+.stat-info {
+    color: #aaa;
+    font-size: 1.8rem;
+    line-height: 1.5;
+}
+
+
+.share{
+    align-self: flex-end;
+    width: calc(50% + 3rem * 2);
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+}
+
+.verticale-line{
+    flex-grow: 1;
+    height: 1px;
+    background-color: #444;
+}
+
+.share-img {
+    display: block;
+    width: 2.4rem;
+    height: 2.4rem;
+}
+
+
+
+
+.close-info {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+
+    width: 3rem;
+    height: 3rem;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition-property: opacity, visibility;
+    transition-duration: .2s;
+}
+
+.more-info .close-info {
+    transition-delay: 1s;
+    opacity: 1;
+    visibility: visible;
+}
+
+.close-info::before, .close-info::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 4.24rem;
+
+    background-color: #BCBCBC;
+    transform: rotate(-45deg);
+    transform-origin: top left;
+}
+
+.close-info::after {
+    transform: translateX(3rem) scaleX(-1) rotate(-45deg);
+}
+
+
+
+
+.rotate-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--clr-bg);
+    z-index: 999;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.rotate-wrapper img {
+    width: 6rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+
+    animation: rotate-icon 2s infinite;
+}
+
+@keyframes rotate-icon {
+    0%, 100% {
+        transform: rotate(-90deg);
+    }
+
+    70% {
+        transform: rotate(0);
+    }
+}
+
+.rotate-wrapper p {
+    font-size: 2rem;
+    color: #eee;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.rotate-wrapper p:last-child {
+    color: #888;
+    font-weight: 400;
+    font-size: 1.4rem;
+}
+
+
+
+
+
+/* responsive */
+
+/* 900px */
+@media (max-width: 56.25em) {
+    html {
+        font-size: 56.25%;
+    }
+
+    .planet {
+        box-shadow: -2rem 2rem 5rem var(--color),
+        inset 5rem -5rem 7.5rem var(--color),
+        inset -10rem 5rem 15rem rgba(0, 0, 0, 0.9);
+    }
+
+    .stats-wrapper {
+        width: 55%;
+    }
+}
+
+/* 760px */
+@media (max-width: 47.5em) {
+    .planet-long-description {
+        max-width: 40ch;
+    }
+    
+}
+
+/* 675.2px */
+@media (max-width: 42.2em) {
+    .planet-long-description {
+        max-width: 35ch;
+    }
+    
+}
+
+
+
+
+@media (max-height: 25em) {
+    html {
+        font-size: 50%;
+    }
+}
+@media (max-height: 22.2em) {
+    .horizental-line {
+        min-height: 2rem;
+    }
+}
+@media (max-height: 21.25em) {
+    .planet-text, .controls-wrapper {
+        padding: 2rem;
+    }
+}
+
+@media (orientation: landscape) {
+    .wrapper {
+        display: grid;
+    }
+
+    .rotate-wrapper {
+        display: none;
+    }
+}
